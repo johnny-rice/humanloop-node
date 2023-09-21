@@ -141,7 +141,7 @@ export class Configuration {
         if (param.useFetch) {
             this.baseOptions["adapter"] = fetchAdapter
         }
-        this.userAgent = param.userAgent === undefined ? "Konfig/0.5.11/typescript" : param.userAgent;
+        this.userAgent = param.userAgent === undefined ? "Konfig/0.5.12/typescript" : param.userAgent;
         this.formDataCtor = param.formDataCtor;
     }
 
