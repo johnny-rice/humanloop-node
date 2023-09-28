@@ -1,6 +1,6 @@
 # humanloop
 
-[![npm](https://img.shields.io/badge/npm-v0.5.13-blue)](https://www.npmjs.com/package/humanloop/v/0.5.13)
+[![npm](https://img.shields.io/badge/npm-v0.5.14-blue)](https://www.npmjs.com/package/humanloop/v/0.5.14)
 
 ## Installing
 
