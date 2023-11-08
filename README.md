@@ -1823,7 +1823,7 @@ A unique identifier to who provided the feedback.
 
 ##### created_at: `string`<a id="created_at-string"></a>
 
-User defined timestamp for when the feedback was created.
+User defined timestamp for when the feedback was created. 
 
 ##### unset: `boolean`<a id="unset-boolean"></a>
 
@@ -2137,7 +2137,7 @@ Generated output from your model for the provided inputs. Can be `None` if loggi
 
 ##### created_at: `string`<a id="created_at-string"></a>
 
-User defined timestamp for when the log was created.
+User defined timestamp for when the log was created. 
 
 ##### error: `string`<a id="error-string"></a>
 
