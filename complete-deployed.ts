@@ -186,16 +186,6 @@ export async function completeDeployed(
   }
   const openai = new OpenAI(openaiApiKey);
 
-  // 11. Construct the OpenAI request parameters.
-  if (!_CHAT_MODELS.includes(deployedConfig.model)) {
-    // The model is not a chat model. This requires making an `openai.completions.create` request, which
-    // is sync. The completions API does not offer an async `acreate` method.
-    // TODO: support this path, and note that `suffix` param _is_ supported for completion models.
-    throw new Error(
-      `Deployed config for project ${project_id} is not a chat model. This is not supported.`
-    );
-  }
-
   // In this path, the model being used is a chat model, so we create a chat message with the prompt as
   // its content.
   const messages: ChatCompletionMessageParam[] = [
