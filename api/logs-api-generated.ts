@@ -97,7 +97,9 @@ export const LogsApiAxiosParamCreator = function (configuration?: Configuration)
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
-                configuration
+                configuration,
+                pathTemplate: '/logs',
+                httpMethod: 'DELETE'
             });
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -139,7 +141,9 @@ export const LogsApiAxiosParamCreator = function (configuration?: Configuration)
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
-                configuration
+                configuration,
+                pathTemplate: '/logs/{id}',
+                httpMethod: 'GET'
             });
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -218,7 +222,9 @@ export const LogsApiAxiosParamCreator = function (configuration?: Configuration)
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
-                configuration
+                configuration,
+                pathTemplate: '/logs',
+                httpMethod: 'GET'
             });
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -263,7 +269,9 @@ export const LogsApiAxiosParamCreator = function (configuration?: Configuration)
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
-                configuration
+                configuration,
+                pathTemplate: '/logs',
+                httpMethod: 'POST'
             });
             localVarRequestOptions.data = serializeDataIfNeeded(logDatapointRequest, localVarRequestOptions, configuration)
 
@@ -313,7 +321,9 @@ export const LogsApiAxiosParamCreator = function (configuration?: Configuration)
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
-                configuration
+                configuration,
+                pathTemplate: '/logs/{id}',
+                httpMethod: 'PATCH'
             });
             localVarRequestOptions.data = serializeDataIfNeeded(updateLogRequest, localVarRequestOptions, configuration)
 
@@ -366,7 +376,9 @@ export const LogsApiAxiosParamCreator = function (configuration?: Configuration)
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
-                configuration
+                configuration,
+                pathTemplate: '/logs',
+                httpMethod: 'PATCH'
             });
             localVarRequestOptions.data = serializeDataIfNeeded(updateLogRequest, localVarRequestOptions, configuration)
 

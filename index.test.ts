@@ -72,7 +72,7 @@ describe("client", () => {
   it("listProjects", async () => {
     const humanloop = new Humanloop({
       apiKey: process.env.HUMANLOOP_API_KEY,
-      basePath: "https://neostaging.humanloop.ml/v4",
+      basePath: "http://127.0.0.1:4010",
       openaiApiKey: process.env.OPENAI_API_KEY,
     });
     let page = await humanloop.projects.list();
@@ -131,6 +131,27 @@ describe("client", () => {
       done = doneReading;
       console.log(decoder.decode(value));
     }
+  });
+
+  it("modelConfigs.register", async () => {
+    const humanloop = new Humanloop({
+      apiKey: process.env.HUMANLOOP_API_KEY,
+      basePath: "https://neostaging.humanloop.ml/v4",
+      openaiApiKey: process.env.OPENAI_API_KEY,
+    });
+    const response = await humanloop.modelConfigs.register({
+      project: "project_id",
+      model: "gpt-3.5-turbo",
+      name: "Entity extractor v0",
+      chat_template: [
+        {
+          role: "system",
+          content:
+            "You are a helpful assistant. Read the user's message and extract any features or issues mentioned in json format.",
+        },
+      ],
+    });
+    expect(response.data).not.toBeNull();
   });
 
   it("chatStreamWithToolcall", async () => {

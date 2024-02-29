@@ -232,16 +232,18 @@ const createResponse = await humanloop.chat({
   return_inputs: true,
   messages: [
     {
-      role: "string_example",
+      role: "user",
     },
   ],
   model_config: {
+    provider: "openai",
     model: "model_example",
     max_tokens: -1,
     temperature: 1,
     top_p: 1,
     presence_penalty: 0,
     frequency_penalty: 0,
+    endpoint: "complete",
   },
 });
 ```
@@ -361,7 +363,7 @@ const createDeployedResponse = await humanloop.chatDeployed({
   return_inputs: true,
   messages: [
     {
-      role: "string_example",
+      role: "user",
     },
   ],
 });
@@ -480,7 +482,7 @@ const createExperimentResponse = await humanloop.chatExperiment({
   return_inputs: true,
   messages: [
     {
-      role: "string_example",
+      role: "user",
     },
   ],
   experiment_id: "experiment_id_example",
@@ -600,7 +602,7 @@ const createModelConfigResponse = await humanloop.chatModelConfiguration({
   return_inputs: true,
   messages: [
     {
-      role: "string_example",
+      role: "user",
     },
   ],
   model_config_id: "model_config_id_example",
@@ -719,12 +721,14 @@ const createResponse = await humanloop.complete({
   stream: false,
   return_inputs: true,
   model_config: {
+    provider: "openai",
     model: "model_example",
     max_tokens: -1,
     temperature: 1,
     top_p: 1,
     presence_penalty: 0,
     frequency_penalty: 0,
+    endpoint: "complete",
     prompt_template: "{{question}}",
   },
 });
@@ -1889,7 +1893,7 @@ The evaluation must currently have status 'running' if swithcing to completed, o
 ```typescript
 const updateStatusResponse = await humanloop.evaluations.updateStatus({
   id: "id_example",
-  status: "string_example",
+  status: "pending",
 });
 ```
 
@@ -1926,9 +1930,9 @@ Create an evaluator within your organization.
 const createResponse = await humanloop.evaluators.create({
   description: "description_example",
   name: "name_example",
-  arguments_type: "string_example",
-  return_type: "string_example",
-  type: "string_example",
+  arguments_type: "target_free",
+  return_type: "boolean",
+  type: "python",
 });
 ```
 
@@ -2061,6 +2065,8 @@ Update an evaluator within your organization.
 ```typescript
 const updateResponse = await humanloop.evaluators.update({
   id: "id_example",
+  arguments_type: "target_free",
+  return_type: "boolean",
 });
 ```
 
@@ -2362,6 +2368,7 @@ const createResponse = await humanloop.finetunes.create({
   name: "name_example",
   dataset_id: "dataset_id_example",
   config: {
+    provider: "openai",
     base_model: "base_model_example",
   },
 });
@@ -2447,6 +2454,7 @@ const summaryResponse = await humanloop.finetunes.summary({
   name: "name_example",
   dataset_id: "dataset_id_example",
   config: {
+    provider: "openai",
     base_model: "base_model_example",
   },
 });
@@ -2968,12 +2976,14 @@ be set as the active model config.
 
 ```typescript
 const registerResponse = await humanloop.modelConfigs.register({
+  provider: "openai",
   model: "model_example",
   max_tokens: -1,
   temperature: 1,
   top_p: 1,
   presence_penalty: 0,
   frequency_penalty: 0,
+  endpoint: "complete",
 });
 ```
 
@@ -3078,12 +3088,14 @@ Serialize a model config to a .prompt file format.
 
 ```typescript
 const serializeResponse = await humanloop.modelConfigs.serialize({
+  provider: "openai",
   model: "model_example",
   max_tokens: -1,
   temperature: 1,
   top_p: 1,
   presence_penalty: 0,
   frequency_penalty: 0,
+  endpoint: "complete",
 });
 ```
 
@@ -3213,6 +3225,7 @@ Create Feedback Type
 const createFeedbackTypeResponse = await humanloop.projects.createFeedbackType({
   id: "id_example",
   type: "type_example",
+  _class: "select",
 });
 ```
 
@@ -3546,6 +3559,8 @@ Get a paginated list of files.
 const listResponse = await humanloop.projects.list({
   page: 0,
   size: 10,
+  sortBy: "created_at",
+  order: "asc",
 });
 ```
 
@@ -3733,6 +3748,7 @@ const updateFeedbackTypesResponse =
     requestBody: [
       {
         type: "type_example",
+        _class: "select",
       },
     ],
   });

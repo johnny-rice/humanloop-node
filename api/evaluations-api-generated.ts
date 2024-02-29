@@ -115,7 +115,9 @@ export const EvaluationsApiAxiosParamCreator = function (configuration?: Configu
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
-                configuration
+                configuration,
+                pathTemplate: '/evaluations/{id}/evaluators',
+                httpMethod: 'PATCH'
             });
             localVarRequestOptions.data = serializeDataIfNeeded(addEvaluatorsRequest, localVarRequestOptions, configuration)
 
@@ -165,7 +167,9 @@ export const EvaluationsApiAxiosParamCreator = function (configuration?: Configu
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
-                configuration
+                configuration,
+                pathTemplate: '/projects/{project_id}/evaluations',
+                httpMethod: 'POST'
             });
             localVarRequestOptions.data = serializeDataIfNeeded(createEvaluationRequest, localVarRequestOptions, configuration)
 
@@ -213,7 +217,9 @@ export const EvaluationsApiAxiosParamCreator = function (configuration?: Configu
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
-                configuration
+                configuration,
+                pathTemplate: '/evaluations/{id}',
+                httpMethod: 'GET'
             });
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -287,7 +293,9 @@ export const EvaluationsApiAxiosParamCreator = function (configuration?: Configu
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
-                configuration
+                configuration,
+                pathTemplate: '/evaluations',
+                httpMethod: 'GET'
             });
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -335,7 +343,9 @@ export const EvaluationsApiAxiosParamCreator = function (configuration?: Configu
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
-                configuration
+                configuration,
+                pathTemplate: '/projects/{project_id}/evaluations',
+                httpMethod: 'GET'
             });
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -387,7 +397,9 @@ export const EvaluationsApiAxiosParamCreator = function (configuration?: Configu
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
-                configuration
+                configuration,
+                pathTemplate: '/evaluations/{id}/datapoints',
+                httpMethod: 'GET'
             });
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -436,7 +448,9 @@ export const EvaluationsApiAxiosParamCreator = function (configuration?: Configu
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
-                configuration
+                configuration,
+                pathTemplate: '/evaluations/{evaluation_id}/log',
+                httpMethod: 'POST'
             });
             localVarRequestOptions.data = serializeDataIfNeeded(createEvaluationLogRequest, localVarRequestOptions, configuration)
 
@@ -486,7 +500,9 @@ export const EvaluationsApiAxiosParamCreator = function (configuration?: Configu
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
-                configuration
+                configuration,
+                pathTemplate: '/evaluations/{evaluation_id}/result',
+                httpMethod: 'POST'
             });
             localVarRequestOptions.data = serializeDataIfNeeded(createEvaluationResultLogRequest, localVarRequestOptions, configuration)
 
@@ -536,7 +552,9 @@ export const EvaluationsApiAxiosParamCreator = function (configuration?: Configu
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
-                configuration
+                configuration,
+                pathTemplate: '/evaluations/{id}/status',
+                httpMethod: 'PATCH'
             });
             localVarRequestOptions.data = serializeDataIfNeeded(updateEvaluationStatusRequest, localVarRequestOptions, configuration)
 
