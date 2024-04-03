@@ -42,8 +42,6 @@ export interface ConfigurationParameters {
     openaiAzureApiKey?: string;
     openaiAzureEndpointApiKey?: string;
     cohereApiKey?: string;
-    ai21ApiKey?: string;
-    mockApiKey?: string;
     anthropicApiKey?: string;
 
     /**
@@ -79,14 +77,6 @@ export class Configuration {
     * Client state
     */
     cohereApiKey?: string;
-    /**
-    * Client state
-    */
-    ai21ApiKey?: string;
-    /**
-    * Client state
-    */
-    mockApiKey?: string;
     /**
     * Client state
     */
@@ -150,8 +140,6 @@ export class Configuration {
         this.openaiAzureApiKey = param.openaiAzureApiKey
         this.openaiAzureEndpointApiKey = param.openaiAzureEndpointApiKey
         this.cohereApiKey = param.cohereApiKey
-        this.ai21ApiKey = param.ai21ApiKey
-        this.mockApiKey = param.mockApiKey
         this.anthropicApiKey = param.anthropicApiKey
 
         this.apiKey = param.apiKey
@@ -166,7 +154,7 @@ export class Configuration {
         if (param.useFetch ?? true) {
             this.baseOptions["adapter"] = fetchAdapter
         }
-        this.userAgent = param.userAgent === undefined ? "Konfig/0.6.16/typescript" : param.userAgent;
+        this.userAgent = param.userAgent === undefined ? "Konfig/0.6.17/typescript" : param.userAgent;
         this.formDataCtor = param.formDataCtor;
     }
 

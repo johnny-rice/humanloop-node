@@ -64,13 +64,5 @@ export function requestBeforeHook({
   if (configuration?.cohereApiKey && providerApiKeys["cohere"] === undefined)
     providerApiKeys["cohere"] = configuration?.cohereApiKey;
 
-  // ai21
-  if (configuration?.ai21ApiKey && providerApiKeys["ai21"] === undefined)
-    providerApiKeys["ai21"] = configuration.ai21ApiKey;
-
-  // mock
-  if (configuration?.mockApiKey && providerApiKeys["mock"] === undefined)
-    providerApiKeys["mock"] = configuration.mockApiKey;
-
   requestBody["provider_api_keys"] = providerApiKeys;
 }
