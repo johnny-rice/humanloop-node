@@ -136,7 +136,7 @@ describe("client", () => {
   it("modelConfigs.register", async () => {
     const humanloop = new Humanloop({
       apiKey: process.env.HUMANLOOP_API_KEY,
-      basePath: "https://neostaging.humanloop.ml/v4",
+      basePath: "http://127.0.0.1:4010",
       openaiApiKey: process.env.OPENAI_API_KEY,
     });
     const response = await humanloop.modelConfigs.register({
