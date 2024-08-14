@@ -43,6 +43,8 @@ import { FeedbackSubmitResponse } from '../models';
 // @ts-ignore
 import { FeedbackTypeProperty } from '../models';
 // @ts-ignore
+import { FeedbackValueProperty1 } from '../models';
+// @ts-ignore
 import { HTTPValidationError } from '../models';
 import { paginate } from "../pagination/paginate";
 import type * as buffer from "buffer"

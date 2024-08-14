@@ -40,7 +40,7 @@ import { ToolsEquivalentToOpenAIFunctionsPropertyInner } from './tools-equivalen
 
 /**
  * @type ConfigProperty
- * The model config used for this generation. Required unless `config_id` or `trial_id` is provided.
+ * The model config used for this generation. Required unless `config_id` is provided.
  * @export
  */
 export type ConfigProperty = { type: 'model' } & ModelConfigRequest | { type: 'tool' } & ToolConfigRequest;

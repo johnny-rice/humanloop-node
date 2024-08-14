@@ -206,7 +206,7 @@ export const ModelConfigsApiAxiosParamCreator = function (configuration?: Config
             };
         },
         /**
-         * Register a model config to a project and optionally add it to an experiment.  If the project name provided does not exist, a new project will be created automatically.  If an experiment name is provided, the specified experiment must already exist. Otherwise, an error will be raised.  If the model config is the first to be associated to the project, it will be set as the active model config.
+         * Register a model config to a project.  If the project name provided does not exist, a new project will be created automatically.  If the model config is the first to be associated to the project, it will be set as the active model config.
          * @summary Register
          * @param {ProjectModelConfigRequest} projectModelConfigRequest 
          * @param {*} [options] Override http request option.
@@ -348,7 +348,7 @@ export const ModelConfigsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Register a model config to a project and optionally add it to an experiment.  If the project name provided does not exist, a new project will be created automatically.  If an experiment name is provided, the specified experiment must already exist. Otherwise, an error will be raised.  If the model config is the first to be associated to the project, it will be set as the active model config.
+         * Register a model config to a project.  If the project name provided does not exist, a new project will be created automatically.  If the model config is the first to be associated to the project, it will be set as the active model config.
          * @summary Register
          * @param {ModelConfigsApiRegisterRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -371,7 +371,6 @@ export const ModelConfigsApiFp = function(configuration?: Configuration) {
                 response_format: requestParameters.response_format,
                 project: requestParameters.project,
                 project_id: requestParameters.project_id,
-                experiment: requestParameters.experiment,
                 prompt_template: requestParameters.prompt_template,
                 chat_template: requestParameters.chat_template,
                 endpoint: requestParameters.endpoint,
@@ -433,7 +432,7 @@ export const ModelConfigsApiFactory = function (configuration?: Configuration, b
             return localVarFp.get(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Register a model config to a project and optionally add it to an experiment.  If the project name provided does not exist, a new project will be created automatically.  If an experiment name is provided, the specified experiment must already exist. Otherwise, an error will be raised.  If the model config is the first to be associated to the project, it will be set as the active model config.
+         * Register a model config to a project.  If the project name provided does not exist, a new project will be created automatically.  If the model config is the first to be associated to the project, it will be set as the active model config.
          * @summary Register
          * @param {ModelConfigsApiRegisterRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -558,7 +557,7 @@ export class ModelConfigsApiGenerated extends BaseAPI {
     }
 
     /**
-     * Register a model config to a project and optionally add it to an experiment.  If the project name provided does not exist, a new project will be created automatically.  If an experiment name is provided, the specified experiment must already exist. Otherwise, an error will be raised.  If the model config is the first to be associated to the project, it will be set as the active model config.
+     * Register a model config to a project.  If the project name provided does not exist, a new project will be created automatically.  If the model config is the first to be associated to the project, it will be set as the active model config.
      * @summary Register
      * @param {ModelConfigsApiRegisterRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

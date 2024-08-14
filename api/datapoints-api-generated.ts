@@ -50,7 +50,7 @@ import { requestBeforeHook } from '../requestBeforeHook';
 export const DatapointsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Delete a list of datapoints by their IDs.  WARNING: This endpoint has been decommisioned and no longer works. Please use the v5 datasets API instead.
+         * Delete a list of datapoints by their IDs.  WARNING: This endpoint has been decommissioned and no longer works. Please use the v5 datasets API instead.
          * @summary Delete
          * @param {*} [options] Override http request option.
          * @deprecated
@@ -135,7 +135,7 @@ export const DatapointsApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Edit the input, messages and criteria fields of a datapoint.  WARNING: This endpoint has been decommisioned and no longer works. Please use the v5 datasets API instead.
+         * Edit the input, messages and criteria fields of a datapoint.  WARNING: This endpoint has been decommissioned and no longer works. Please use the v5 datasets API instead.
          * @summary Update
          * @param {string} id String ID of datapoint.
          * @param {*} [options] Override http request option.
@@ -190,7 +190,7 @@ export const DatapointsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = DatapointsApiAxiosParamCreator(configuration)
     return {
         /**
-         * Delete a list of datapoints by their IDs.  WARNING: This endpoint has been decommisioned and no longer works. Please use the v5 datasets API instead.
+         * Delete a list of datapoints by their IDs.  WARNING: This endpoint has been decommissioned and no longer works. Please use the v5 datasets API instead.
          * @summary Delete
          * @param {*} [options] Override http request option.
          * @deprecated
@@ -212,7 +212,7 @@ export const DatapointsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Edit the input, messages and criteria fields of a datapoint.  WARNING: This endpoint has been decommisioned and no longer works. Please use the v5 datasets API instead.
+         * Edit the input, messages and criteria fields of a datapoint.  WARNING: This endpoint has been decommissioned and no longer works. Please use the v5 datasets API instead.
          * @summary Update
          * @param {DatapointsApiUpdateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -234,7 +234,7 @@ export const DatapointsApiFactory = function (configuration?: Configuration, bas
     const localVarFp = DatapointsApiFp(configuration)
     return {
         /**
-         * Delete a list of datapoints by their IDs.  WARNING: This endpoint has been decommisioned and no longer works. Please use the v5 datasets API instead.
+         * Delete a list of datapoints by their IDs.  WARNING: This endpoint has been decommissioned and no longer works. Please use the v5 datasets API instead.
          * @summary Delete
          * @param {*} [options] Override http request option.
          * @deprecated
@@ -254,7 +254,7 @@ export const DatapointsApiFactory = function (configuration?: Configuration, bas
             return localVarFp.get(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Edit the input, messages and criteria fields of a datapoint.  WARNING: This endpoint has been decommisioned and no longer works. Please use the v5 datasets API instead.
+         * Edit the input, messages and criteria fields of a datapoint.  WARNING: This endpoint has been decommissioned and no longer works. Please use the v5 datasets API instead.
          * @summary Update
          * @param {DatapointsApiUpdateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -307,7 +307,7 @@ export type DatapointsApiUpdateRequest = {
  */
 export class DatapointsApiGenerated extends BaseAPI {
     /**
-     * Delete a list of datapoints by their IDs.  WARNING: This endpoint has been decommisioned and no longer works. Please use the v5 datasets API instead.
+     * Delete a list of datapoints by their IDs.  WARNING: This endpoint has been decommissioned and no longer works. Please use the v5 datasets API instead.
      * @summary Delete
      * @param {*} [options] Override http request option.
      * @deprecated
@@ -331,7 +331,7 @@ export class DatapointsApiGenerated extends BaseAPI {
     }
 
     /**
-     * Edit the input, messages and criteria fields of a datapoint.  WARNING: This endpoint has been decommisioned and no longer works. Please use the v5 datasets API instead.
+     * Edit the input, messages and criteria fields of a datapoint.  WARNING: This endpoint has been decommissioned and no longer works. Please use the v5 datasets API instead.
      * @summary Update
      * @param {DatapointsApiUpdateRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

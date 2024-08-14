@@ -18,11 +18,9 @@
 - [Reference](#reference)
   * [`humanloop.chat`](#humanloopchat)
   * [`humanloop.chatDeployed`](#humanloopchatdeployed)
-  * [`humanloop.chatExperiment`](#humanloopchatexperiment)
   * [`humanloop.chatModelConfiguration`](#humanloopchatmodelconfiguration)
   * [`humanloop.complete`](#humanloopcomplete)
   * [`humanloop.completeDeployed`](#humanloopcompletedeployed)
-  * [`humanloop.completeExperiment`](#humanloopcompleteexperiment)
   * [`humanloop.completeModelConfiguration`](#humanloopcompletemodelconfiguration)
   * [`humanloop.datapoints.delete`](#humanloopdatapointsdelete)
   * [`humanloop.datapoints.get`](#humanloopdatapointsget)
@@ -64,7 +62,6 @@
   * [`humanloop.projects.create`](#humanloopprojectscreate)
   * [`humanloop.projects.createFeedbackType`](#humanloopprojectscreatefeedbacktype)
   * [`humanloop.projects.deactivateConfig`](#humanloopprojectsdeactivateconfig)
-  * [`humanloop.projects.deactivateExperiment`](#humanloopprojectsdeactivateexperiment)
   * [`humanloop.projects.delete`](#humanloopprojectsdelete)
   * [`humanloop.projects.deleteDeployedConfig`](#humanloopprojectsdeletedeployedconfig)
   * [`humanloop.projects.deployConfig`](#humanloopprojectsdeployconfig)
@@ -343,7 +340,7 @@ The format of the response. Only type json_object is currently supported for cha
 
 Get a chat response using the project's active deployment.
 
-The active deployment can be a specific model configuration or an experiment.
+The active deployment can be a specific model configuration.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -454,126 +451,6 @@ The environment name used to create a chat response. If not specified, the defau
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/chat-deployed` `POST`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `humanloop.chatExperiment`<a id="humanloopchatexperiment"></a>
-
-Get a chat response for a specific experiment.
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```typescript
-const createExperimentResponse = await humanloop.chatExperiment({
-  save: true,
-  num_samples: 1,
-  stream: false,
-  return_inputs: true,
-  messages: [
-    {
-      role: "user",
-    },
-  ],
-  experiment_id: "experiment_id_example",
-});
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### messages: [`ChatMessageWithToolCall`](./models/chat-message-with-tool-call.ts)[]<a id="messages-chatmessagewithtoolcallmodelschat-message-with-tool-callts"></a>
-
-The messages passed to the to provider chat endpoint.
-
-##### experiment_id: `string`<a id="experiment_id-string"></a>
-
-If an experiment ID is provided a model configuration will be sampled from the experiments active model configurations.
-
-##### project: `string`<a id="project-string"></a>
-
-Unique project name. If no project exists with this name, a new project will be created.
-
-##### project_id: `string`<a id="project_id-string"></a>
-
-Unique ID of a project to associate to the log. Either this or `project` must be provided.
-
-##### session_id: `string`<a id="session_id-string"></a>
-
-ID of the session to associate the datapoint.
-
-##### session_reference_id: `string`<a id="session_reference_id-string"></a>
-
-A unique string identifying the session to associate the datapoint to. Allows you to log multiple datapoints to a session (using an ID kept by your internal systems) by passing the same `session_reference_id` in subsequent log requests. Specify at most one of this or `session_id`.
-
-##### parent_id: `string`<a id="parent_id-string"></a>
-
-ID associated to the parent datapoint in a session.
-
-##### parent_reference_id: `string`<a id="parent_reference_id-string"></a>
-
-A unique string identifying the previously-logged parent datapoint in a session. Allows you to log nested datapoints with your internal system IDs by passing the same reference ID as `parent_id` in a prior log request. Specify at most one of this or `parent_id`. Note that this cannot refer to a datapoint being logged in the same request.
-
-##### inputs: `object`<a id="inputs-object"></a>
-
-The inputs passed to the prompt template.
-
-##### source: `string`<a id="source-string"></a>
-
-Identifies where the model was called from.
-
-##### metadata: `object`<a id="metadata-object"></a>
-
-Any additional metadata to record.
-
-##### save: `boolean`<a id="save-boolean"></a>
-
-Whether the request/response payloads will be stored on Humanloop.
-
-##### source_datapoint_id: `string`<a id="source_datapoint_id-string"></a>
-
-ID of the source datapoint if this is a log derived from a datapoint in a dataset.
-
-##### provider_api_keys: [`ProviderApiKeys`](./models/provider-api-keys.ts)<a id="provider_api_keys-providerapikeysmodelsprovider-api-keysts"></a>
-
-API keys required by each provider to make API calls. The API keys provided here are not stored by Humanloop. If not specified here, Humanloop will fall back to the key saved to your organization.
-
-##### num_samples: `number`<a id="num_samples-number"></a>
-
-The number of chat responses, where each chat response will use a model configuration sampled from the experiment.
-
-##### stream: `boolean`<a id="stream-boolean"></a>
-
-If true, tokens will be sent as data-only server-sent events. If num_samples > 1, samples are streamed back independently.
-
-##### user: `string`<a id="user-string"></a>
-
-End-user ID passed through to provider call.
-
-##### seed: `number`<a id="seed-number"></a>
-
-Deprecated field: the seed is instead set as part of the request.config object.
-
-##### return_inputs: `boolean`<a id="return_inputs-boolean"></a>
-
-Whether to return the inputs in the response. If false, the response will contain an empty dictionary under inputs. This is useful for reducing the size of the response. Defaults to true.
-
-##### tool_choice: [`ToolChoiceProperty`](./models/tool-choice-property.ts)<a id="tool_choice-toolchoicepropertymodelstool-choice-propertyts"></a>
-
-##### tool_call: [`ToolCallProperty`](./models/tool-call-property.ts)<a id="tool_call-toolcallpropertymodelstool-call-propertyts"></a>
-
-##### response_format: [`ResponseFormat`](./models/response-format.ts)<a id="response_format-responseformatmodelsresponse-formatts"></a>
-
-The format of the response. Only type json_object is currently supported for chat.
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[ChatResponse](./models/chat-response.ts)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/chat-experiment` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -825,7 +702,7 @@ The suffix that comes after a completion of inserted text. Useful for completion
 
 Create a completion using the project's active deployment.
 
-The active deployment can be a specific model configuration or an experiment.
+The active deployment can be a specific model configuration.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -927,117 +804,6 @@ The environment name used to create a chat response. If not specified, the defau
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/completion-deployed` `POST`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `humanloop.completeExperiment`<a id="humanloopcompleteexperiment"></a>
-
-Create a completion for a specific experiment.
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```typescript
-const createExperimentResponse = await humanloop.completeExperiment({
-  save: true,
-  num_samples: 1,
-  stream: false,
-  return_inputs: true,
-  experiment_id: "experiment_id_example",
-});
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### experiment_id: `string`<a id="experiment_id-string"></a>
-
-If an experiment ID is provided a model configuration will be sampled from the experiments active model configurations.
-
-##### project: `string`<a id="project-string"></a>
-
-Unique project name. If no project exists with this name, a new project will be created.
-
-##### project_id: `string`<a id="project_id-string"></a>
-
-Unique ID of a project to associate to the log. Either this or `project` must be provided.
-
-##### session_id: `string`<a id="session_id-string"></a>
-
-ID of the session to associate the datapoint.
-
-##### session_reference_id: `string`<a id="session_reference_id-string"></a>
-
-A unique string identifying the session to associate the datapoint to. Allows you to log multiple datapoints to a session (using an ID kept by your internal systems) by passing the same `session_reference_id` in subsequent log requests. Specify at most one of this or `session_id`.
-
-##### parent_id: `string`<a id="parent_id-string"></a>
-
-ID associated to the parent datapoint in a session.
-
-##### parent_reference_id: `string`<a id="parent_reference_id-string"></a>
-
-A unique string identifying the previously-logged parent datapoint in a session. Allows you to log nested datapoints with your internal system IDs by passing the same reference ID as `parent_id` in a prior log request. Specify at most one of this or `parent_id`. Note that this cannot refer to a datapoint being logged in the same request.
-
-##### inputs: `object`<a id="inputs-object"></a>
-
-The inputs passed to the prompt template.
-
-##### source: `string`<a id="source-string"></a>
-
-Identifies where the model was called from.
-
-##### metadata: `object`<a id="metadata-object"></a>
-
-Any additional metadata to record.
-
-##### save: `boolean`<a id="save-boolean"></a>
-
-Whether the request/response payloads will be stored on Humanloop.
-
-##### source_datapoint_id: `string`<a id="source_datapoint_id-string"></a>
-
-ID of the source datapoint if this is a log derived from a datapoint in a dataset.
-
-##### provider_api_keys: [`ProviderApiKeys`](./models/provider-api-keys.ts)<a id="provider_api_keys-providerapikeysmodelsprovider-api-keysts"></a>
-
-API keys required by each provider to make API calls. The API keys provided here are not stored by Humanloop. If not specified here, Humanloop will fall back to the key saved to your organization.
-
-##### num_samples: `number`<a id="num_samples-number"></a>
-
-The number of chat responses, where each chat response will use a model configuration sampled from the experiment.
-
-##### stream: `boolean`<a id="stream-boolean"></a>
-
-If true, tokens will be sent as data-only server-sent events. If num_samples > 1, samples are streamed back independently.
-
-##### user: `string`<a id="user-string"></a>
-
-End-user ID passed through to provider call.
-
-##### seed: `number`<a id="seed-number"></a>
-
-Deprecated field: the seed is instead set as part of the request.config object.
-
-##### return_inputs: `boolean`<a id="return_inputs-boolean"></a>
-
-Whether to return the inputs in the response. If false, the response will contain an empty dictionary under inputs. This is useful for reducing the size of the response. Defaults to true.
-
-##### logprobs: `number`<a id="logprobs-number"></a>
-
-Include the log probabilities of the top n tokens in the provider_response
-
-##### suffix: `string`<a id="suffix-string"></a>
-
-The suffix that comes after a completion of inserted text. Useful for completions that act like inserts.
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[CompletionResponse](./models/completion-response.ts)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/completion-experiment` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -1160,7 +926,7 @@ The suffix that comes after a completion of inserted text. Useful for completion
 
 Delete a list of datapoints by their IDs.
 
-WARNING: This endpoint has been decommisioned and no longer works. Please use the v5 datasets API instead.
+WARNING: This endpoint has been decommissioned and no longer works. Please use the v5 datasets API instead.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -1213,7 +979,7 @@ String ID of datapoint.
 
 Edit the input, messages and criteria fields of a datapoint.
 
-WARNING: This endpoint has been decommisioned and no longer works. Please use the v5 datasets API instead.
+WARNING: This endpoint has been decommissioned and no longer works. Please use the v5 datasets API instead.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -2152,9 +1918,7 @@ const feedbackResponse = await humanloop.feedback({
 
 ##### type: [`FeedbackTypeProperty`](./models/feedback-type-property.ts)<a id="type-feedbacktypepropertymodelsfeedback-type-propertyts"></a>
 
-##### value: `string`<a id="value-string"></a>
-
-The feedback value to be set. This field should be left blank when unsetting \\\'rating\\\', \\\'correction\\\' or \\\'comment\\\', but is required otherwise.
+##### value: [`FeedbackValueProperty1`](./models/feedback-value-property1.ts)<a id="value-feedbackvalueproperty1modelsfeedback-value-property1ts"></a>
 
 ##### data_id: `string`<a id="data_id-string"></a>
 
@@ -2371,10 +2135,6 @@ ID of the source datapoint if this is a log derived from a datapoint in a datase
 ##### reference_id: `string`<a id="reference_id-string"></a>
 
 A unique string to reference the datapoint. Allows you to log nested datapoints with your internal system IDs by passing the same reference ID as `parent_id` in a subsequent log request.
-
-##### trial_id: `string`<a id="trial_id-string"></a>
-
-Unique ID of an experiment trial to associate to the log.
 
 ##### messages: [`ChatMessageWithToolCall`](./models/chat-message-with-tool-call.ts)[]<a id="messages-chatmessagewithtoolcallmodelschat-message-with-tool-callts"></a>
 
@@ -2633,14 +2393,10 @@ String ID of the model config. Starts with `config_`.
 
 ### `humanloop.modelConfigs.register`<a id="humanloopmodelconfigsregister"></a>
 
-Register a model config to a project and optionally add it to an
-experiment.
+Register a model config to a project.
 
 If the project name provided does not exist, a new project will be created
 automatically.
-
-If an experiment name is provided, the specified experiment must already
-exist. Otherwise, an error will be raised.
 
 If the model config is the first to be associated to the project, it will
 be set as the active model config.
@@ -2719,10 +2475,6 @@ Unique project name. If it does not exist, a new project will be created.
 ##### project_id: `string`<a id="project_id-string"></a>
 
 Unique project ID
-
-##### experiment: `string`<a id="experiment-string"></a>
-
-If specified, the model config will be added to this experiment. Experiments are used for A/B testing and optimizing hyperparameters.
 
 ##### prompt_template: `string`<a id="prompt_template-string"></a>
 
@@ -2867,10 +2619,6 @@ const createResponse = await humanloop.projects.create({
 
 Unique project name.
 
-##### feedback_types: [`FeedbackTypeRequest`](./models/feedback-type-request.ts)[]<a id="feedback_types-feedbacktyperequestmodelsfeedback-type-requestts"></a>
-
-Feedback types to be created.
-
 ##### directory_id: `string`<a id="directory_id-string"></a>
 
 ID of directory to assign project to. Starts with `dir_`. If not provided, the project will be created in the root directory.
@@ -2889,6 +2637,7 @@ ID of directory to assign project to. Starts with `dir_`. If not provided, the p
 
 
 ### `humanloop.projects.createFeedbackType`<a id="humanloopprojectscreatefeedbacktype"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 Create Feedback Type
 
@@ -2908,6 +2657,10 @@ const createFeedbackTypeResponse = await humanloop.projects.createFeedbackType({
 
 The type of feedback to update.
 
+##### class: [`FeedbackClass`](./models/feedback-class.ts)<a id="class-feedbackclassmodelsfeedback-classts"></a>
+
+The data type associated to this feedback type; whether it is a \\\'text\\\'/\\\'select\\\'/\\\'multi_select\\\'.
+
 ##### id: `string`<a id="id-string"></a>
 
 String ID of project. Starts with `pr_`.
@@ -2915,10 +2668,6 @@ String ID of project. Starts with `pr_`.
 ##### values: [`FeedbackLabelRequest`](./models/feedback-label-request.ts)[]<a id="values-feedbacklabelrequestmodelsfeedback-label-requestts"></a>
 
 The feedback values to be available. This field should only be populated when updating a \\\'select\\\' or \\\'multi_select\\\' feedback class.
-
-##### class: [`FeedbackClass`](./models/feedback-class.ts)<a id="class-feedbackclassmodelsfeedback-classts"></a>
-
-The data type associated to this feedback type; whether it is a \\\'text\\\'/\\\'select\\\'/\\\'multi_select\\\'. This is optional when updating the default feedback types (i.e. when `type` is \\\'rating\\\', \\\'action\\\' or \\\'issue\\\').
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -2964,44 +2713,6 @@ Name for the environment. E.g. \'production\'. If not provided, will delete the 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/projects/{id}/active-config` `DELETE`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `humanloop.projects.deactivateExperiment`<a id="humanloopprojectsdeactivateexperiment"></a>
-
-Remove the project's active experiment, if set.
-
-This has no effect if the project does not have an active experiment set.
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```typescript
-const deactivateExperimentResponse =
-  await humanloop.projects.deactivateExperiment({
-    id: "id_example",
-  });
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### id: `string`<a id="id-string"></a>
-
-String ID of project. Starts with `pr_`.
-
-##### environment: `string`<a id="environment-string"></a>
-
-Name for the environment. E.g. \'producton\'. If not provided, will return the experiment for the default environment.
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[ProjectResponse](./models/project-response.ts)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/projects/{id}/active-experiment` `DELETE`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -3077,20 +2788,17 @@ If the environment already has a model config deployed, it will be replaced.
 ```typescript
 const deployConfigResponse = await humanloop.projects.deployConfig({
   projectId: "projectId_example",
+  config_id: "config_id_example",
 });
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### projectId: `string`<a id="projectid-string"></a>
-
 ##### config_id: `string`<a id="config_id-string"></a>
 
 Model config unique identifier generated by Humanloop.
 
-##### experiment_id: `string`<a id="experiment_id-string"></a>
-
-String ID of experiment. Starts with `exp_`.
+##### projectId: `string`<a id="projectid-string"></a>
 
 ##### environments: [`EnvironmentRequest`](./models/environment-request.ts)[]<a id="environments-environmentrequestmodelsenvironment-requestts"></a>
 
@@ -3189,7 +2897,7 @@ String ID of project. Starts with `pr_`.
 Retrieves a config to use to execute your model.
 
 A config will be selected based on the project's
-active config/experiment settings.
+active config settings.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -3207,7 +2915,7 @@ String ID of project. Starts with `pr_`.
 
 ##### environment: `string`<a id="environment-string"></a>
 
-Name for the environment. E.g. \'producton\'. If not provided, will return the active config for the default environment.
+Name for the environment. E.g. \'production\'. If not provided, will return the active config for the default environment.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -3345,15 +3053,10 @@ String ID of project. Starts with `pr_`.
 
 Update a specific project.
 
-Set the project's active model config/experiment by passing either
-`active_experiment_id` or `active_model_config_id`.
+Set the project's active model config by passing `active_model_config_id`.
 These will be set to the Default environment unless a list of environments
 are also passed in specifically detailing which environments to assign the
-active config or experiment.
-
-Set the feedback labels to be treated as positive user feedback used in
-calculating top-level project metrics by passing a list of labels in
-`positive_labels`.
+active config.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -3373,17 +3076,9 @@ String ID of project. Starts with `pr_`.
 
 The new unique project name. Caution, if you are using the project name as the unique identifier in your API calls, changing the name will break the calls.
 
-##### active_experiment_id: `string`<a id="active_experiment_id-string"></a>
-
-ID for an experiment to set as the project\\\'s active deployment. Starts with \\\'exp_\\\'. At most one of \\\'active_experiment_id\\\' and \\\'active_model_config_id\\\' can be set.
-
 ##### active_config_id: `string`<a id="active_config_id-string"></a>
 
-ID for a config to set as the project\\\'s active deployment. Starts with \\\'config_\\\'. At most one of \\\'active_experiment_id\\\' and \\\'active_config_id\\\' can be set.
-
-##### positive_labels: [`PositiveLabel`](./models/positive-label.ts)[]<a id="positive_labels-positivelabelmodelspositive-labelts"></a>
-
-The full list of labels to treat as positive user feedback.
+ID for a config to set as the project\\\'s active deployment. Starts with \\\'config_\\\'. 
 
 ##### directory_id: `string`<a id="directory_id-string"></a>
 
@@ -3403,14 +3098,11 @@ ID of directory to assign project to. Starts with `dir_`.
 
 
 ### `humanloop.projects.updateFeedbackTypes`<a id="humanloopprojectsupdatefeedbacktypes"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 Update feedback types.
 
-Allows enabling the available feedback types and setting status of
-feedback types/categorical values.
-
-This behaves like an upsert; any feedback categorical values that do not
-already exist in the project will be created.
+WARNING: This endpoint has been decommissioned and no longer works. Please use the v5 Human Evaluators API instead.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -3418,12 +3110,6 @@ already exist in the project will be created.
 const updateFeedbackTypesResponse =
   await humanloop.projects.updateFeedbackTypes({
     id: "id_example",
-    requestBody: [
-      {
-        type: "type_example",
-        _class: "select",
-      },
-    ],
   });
 ```
 
@@ -3432,12 +3118,6 @@ const updateFeedbackTypesResponse =
 ##### id: `string`<a id="id-string"></a>
 
 String ID of project. Starts with `pr_`.
-
-##### requestBody: [`FeedbackTypeRequest`](./models/feedback-type-request.ts)[]<a id="requestbody-feedbacktyperequestmodelsfeedback-type-requestts"></a>
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[FeedbackTypeModel](./models/feedback-type-model.ts)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 

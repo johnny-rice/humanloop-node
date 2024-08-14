@@ -44,16 +44,16 @@ export interface FeedbackTypeRequest {
      */
     'type': string;
     /**
+     * The data type associated to this feedback type; whether it is a \'text\'/\'select\'/\'multi_select\'.
+     * @type {FeedbackClass}
+     * @memberof FeedbackTypeRequest
+     */
+    'class': FeedbackClass;
+    /**
      * The feedback values to be available. This field should only be populated when updating a \'select\' or \'multi_select\' feedback class.
      * @type {Array<FeedbackLabelRequest>}
      * @memberof FeedbackTypeRequest
      */
     'values'?: Array<FeedbackLabelRequest>;
-    /**
-     * The data type associated to this feedback type; whether it is a \'text\'/\'select\'/\'multi_select\'. This is optional when updating the default feedback types (i.e. when `type` is \'rating\', \'action\' or \'issue\').
-     * @type {FeedbackClass}
-     * @memberof FeedbackTypeRequest
-     */
-    'class'?: FeedbackClass;
 }
 

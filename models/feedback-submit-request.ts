@@ -30,6 +30,7 @@ import type * as buffer from "buffer"
 
 import { FeedbackRequest } from './feedback-request';
 import { FeedbackTypeProperty } from './feedback-type-property';
+import { FeedbackValueProperty1 } from './feedback-value-property1';
 
 /**
  * @type FeedbackSubmitRequest

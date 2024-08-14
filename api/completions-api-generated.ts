@@ -39,8 +39,6 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 // @ts-ignore
 import { CompletionDeployedRequest } from '../models';
 // @ts-ignore
-import { CompletionExperimentRequest } from '../models';
-// @ts-ignore
 import { CompletionModelConfigRequest } from '../models';
 // @ts-ignore
 import { CompletionRequest } from '../models';
@@ -110,7 +108,7 @@ export const CompletionsApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
-         * Create a completion using the project\'s active deployment.  The active deployment can be a specific model configuration or an experiment.
+         * Create a completion using the project\'s active deployment.  The active deployment can be a specific model configuration.
          * @summary Completion Deployed
          * @param {CompletionDeployedRequest} completionDeployedRequest 
          * @param {*} [options] Override http request option.
@@ -150,54 +148,6 @@ export const CompletionsApiAxiosParamCreator = function (configuration?: Configu
                 httpMethod: 'POST'
             });
             localVarRequestOptions.data = serializeDataIfNeeded(completionDeployedRequest, localVarRequestOptions, configuration)
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Create a completion for a specific experiment.
-         * @summary Completion Experiment
-         * @param {CompletionExperimentRequest} completionExperimentRequest 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createExperiment: async (completionExperimentRequest: CompletionExperimentRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'completionExperimentRequest' is not null or undefined
-            assertParamExists('createExperiment', 'completionExperimentRequest', completionExperimentRequest)
-            const localVarPath = `/completion-experiment`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication APIKeyHeader required
-            await setApiKeyToObject({ object: localVarHeaderParameter, key: "X-API-KEY", keyParamName: "xAPIKEY", configuration })
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            requestBeforeHook({
-                requestBody: completionExperimentRequest,
-                queryParameters: localVarQueryParameter,
-                requestConfig: localVarRequestOptions,
-                path: localVarPath,
-                configuration,
-                pathTemplate: '/completion-experiment',
-                httpMethod: 'POST'
-            });
-            localVarRequestOptions.data = serializeDataIfNeeded(completionExperimentRequest, localVarRequestOptions, configuration)
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
@@ -297,7 +247,7 @@ export const CompletionsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Create a completion using the project\'s active deployment.  The active deployment can be a specific model configuration or an experiment.
+         * Create a completion using the project\'s active deployment.  The active deployment can be a specific model configuration.
          * @summary Completion Deployed
          * @param {CompletionsApiCreateDeployedRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -327,39 +277,6 @@ export const CompletionsApiFp = function(configuration?: Configuration) {
                 environment: requestParameters.environment
             };
             const localVarAxiosArgs = await localVarAxiosParamCreator.createDeployed(completionDeployedRequest, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Create a completion for a specific experiment.
-         * @summary Completion Experiment
-         * @param {CompletionsApiCreateExperimentRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async createExperiment(requestParameters: CompletionsApiCreateExperimentRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CompletionResponse>> {
-            const completionExperimentRequest: CompletionExperimentRequest = {
-                project: requestParameters.project,
-                project_id: requestParameters.project_id,
-                session_id: requestParameters.session_id,
-                session_reference_id: requestParameters.session_reference_id,
-                parent_id: requestParameters.parent_id,
-                parent_reference_id: requestParameters.parent_reference_id,
-                inputs: requestParameters.inputs,
-                source: requestParameters.source,
-                metadata: requestParameters.metadata,
-                save: requestParameters.save,
-                source_datapoint_id: requestParameters.source_datapoint_id,
-                provider_api_keys: requestParameters.provider_api_keys,
-                num_samples: requestParameters.num_samples,
-                stream: requestParameters.stream,
-                user: requestParameters.user,
-                seed: requestParameters.seed,
-                return_inputs: requestParameters.return_inputs,
-                logprobs: requestParameters.logprobs,
-                suffix: requestParameters.suffix,
-                experiment_id: requestParameters.experiment_id
-            };
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createExperiment(completionExperimentRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -416,7 +333,7 @@ export const CompletionsApiFactory = function (configuration?: Configuration, ba
             return localVarFp.create(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Create a completion using the project\'s active deployment.  The active deployment can be a specific model configuration or an experiment.
+         * Create a completion using the project\'s active deployment.  The active deployment can be a specific model configuration.
          * @summary Completion Deployed
          * @param {CompletionsApiCreateDeployedRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -424,16 +341,6 @@ export const CompletionsApiFactory = function (configuration?: Configuration, ba
          */
         createDeployed(requestParameters: CompletionsApiCreateDeployedRequest, options?: AxiosRequestConfig): AxiosPromise<CompletionResponse> {
             return localVarFp.createDeployed(requestParameters, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Create a completion for a specific experiment.
-         * @summary Completion Experiment
-         * @param {CompletionsApiCreateExperimentRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createExperiment(requestParameters: CompletionsApiCreateExperimentRequest, options?: AxiosRequestConfig): AxiosPromise<CompletionResponse> {
-            return localVarFp.createExperiment(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
          * Create a completion for a specific model configuration.
@@ -467,15 +374,6 @@ export type CompletionsApiCreateDeployedRequest = {
 } & CompletionDeployedRequest
 
 /**
- * Request parameters for createExperiment operation in CompletionsApi.
- * @export
- * @interface CompletionsApiCreateExperimentRequest
- */
-export type CompletionsApiCreateExperimentRequest = {
-    
-} & CompletionExperimentRequest
-
-/**
  * Request parameters for createModelConfig operation in CompletionsApi.
  * @export
  * @interface CompletionsApiCreateModelConfigRequest
@@ -504,7 +402,7 @@ export class CompletionsApiGenerated extends BaseAPI {
     }
 
     /**
-     * Create a completion using the project\'s active deployment.  The active deployment can be a specific model configuration or an experiment.
+     * Create a completion using the project\'s active deployment.  The active deployment can be a specific model configuration.
      * @summary Completion Deployed
      * @param {CompletionsApiCreateDeployedRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -513,18 +411,6 @@ export class CompletionsApiGenerated extends BaseAPI {
      */
     public createDeployed(requestParameters: CompletionsApiCreateDeployedRequest, options?: AxiosRequestConfig) {
         return CompletionsApiFp(this.configuration).createDeployed(requestParameters, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Create a completion for a specific experiment.
-     * @summary Completion Experiment
-     * @param {CompletionsApiCreateExperimentRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof CompletionsApiGenerated
-     */
-    public createExperiment(requestParameters: CompletionsApiCreateExperimentRequest, options?: AxiosRequestConfig) {
-        return CompletionsApiFp(this.configuration).createExperiment(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

@@ -30,7 +30,6 @@ import type * as buffer from "buffer"
 
 import { ConfigType } from './config-type';
 import { EvaluatorResponse } from './evaluator-response';
-import { ExperimentResponse } from './experiment-response';
 import { FeedbackTypeModel } from './feedback-type-model';
 import { ProjectConfigResponse } from './project-config-response';
 import { ProjectUserResponse } from './project-user-response';
@@ -54,13 +53,7 @@ export interface ProjectResponse {
      */
     'name': string;
     /**
-     * Experiment that has been set as the project\'s active deployment. At most one of active_experiment and active_model_config can be set.
-     * @type {ExperimentResponse}
-     * @memberof ProjectResponse
-     */
-    'active_experiment'?: ExperimentResponse;
-    /**
-     * Config that has been set as the project\'s active deployment. At most one of active_experiment and active_model_config can be set.
+     * Config that has been set as the project\'s active deployment.
      * @type {ProjectConfigResponse}
      * @memberof ProjectResponse
      */

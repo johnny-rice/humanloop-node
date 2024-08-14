@@ -33,6 +33,6 @@ import type * as buffer from "buffer"
  * @type ValueProperty
  * @export
  */
-export type ValueProperty = boolean | number;
+export type ValueProperty = boolean | number | string | Array<string>;
 
 

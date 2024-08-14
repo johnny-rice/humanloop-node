@@ -34,6 +34,6 @@ import type * as buffer from "buffer"
  * The feedback value to set. This would be the appropriate text for \'correction\' or \'comment\', or a label to apply for \'rating\', \'action\', or \'issue\'.
  * @export
  */
-export type FeedbackValueProperty = number | string;
+export type FeedbackValueProperty = boolean | number | Array<string> | string;
 
 

@@ -112,12 +112,6 @@ export interface LogRequest {
      */
     'reference_id'?: string;
     /**
-     * Unique ID of an experiment trial to associate to the log.
-     * @type {string}
-     * @memberof LogRequest
-     */
-    'trial_id'?: string;
-    /**
      * The messages passed to the to provider chat endpoint.
      * @type {Array<ChatMessageWithToolCall>}
      * @memberof LogRequest

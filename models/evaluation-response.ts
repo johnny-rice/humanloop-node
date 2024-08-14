@@ -32,7 +32,6 @@ import { ConfigResponse } from './config-response';
 import { DatasetResponse } from './dataset-response';
 import { EvaluationStatus } from './evaluation-status';
 import { EvaluatorResponse } from './evaluator-response';
-import { FeedbackAggregateResponseInner } from './feedback-aggregate-response-inner';
 import { ModelConfigEvaluatorAggregateResponse } from './model-config-evaluator-aggregate-response';
 
 /**
@@ -101,11 +100,5 @@ export interface EvaluationResponse {
      * @memberof EvaluationResponse
      */
     'evaluator_aggregates'?: Array<ModelConfigEvaluatorAggregateResponse>;
-    /**
-     * 
-     * @type {Array<FeedbackAggregateResponseInner>}
-     * @memberof EvaluationResponse
-     */
-    'feedback_aggregates'?: Array<FeedbackAggregateResponseInner>;
 }
 

@@ -34,5 +34,5 @@ import type * as buffer from "buffer"
  * @export
  * @enum {string}
  */
-export type EvaluatorReturnTypeEnum = 'boolean' | 'number'
+export type EvaluatorReturnTypeEnum = 'boolean' | 'number' | 'select' | 'multi_select' | 'text'
 

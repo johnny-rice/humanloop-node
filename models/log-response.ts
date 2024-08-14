@@ -33,7 +33,6 @@ import { ConfigResponse } from './config-response';
 import { EvaluationResultResponse } from './evaluation-result-response';
 import { FeedbackResponse } from './feedback-response';
 import { JudgmentProperty } from './judgment-property';
-import { MetricValueResponse } from './metric-value-response';
 import { ObservabilityStatus } from './observability-status';
 import { ToolChoiceProperty } from './tool-choice-property';
 import { ToolResultResponse } from './tool-result-response';
@@ -122,12 +121,6 @@ export interface LogResponse {
      * @memberof LogResponse
      */
     'reference_id'?: string;
-    /**
-     * Unique ID of an experiment trial to associate to the log.
-     * @type {string}
-     * @memberof LogResponse
-     */
-    'trial_id'?: string;
     /**
      * The messages passed to the to provider chat endpoint.
      * @type {Array<ChatMessageWithToolCall>}
@@ -266,12 +259,6 @@ export interface LogResponse {
      * @memberof LogResponse
      */
     'finish_reason'?: string;
-    /**
-     * 
-     * @type {Array<MetricValueResponse>}
-     * @memberof LogResponse
-     */
-    'metric_values'?: Array<MetricValueResponse>;
     /**
      * 
      * @type {Array<ToolResultResponse>}

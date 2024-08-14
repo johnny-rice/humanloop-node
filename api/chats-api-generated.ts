@@ -39,8 +39,6 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 // @ts-ignore
 import { ChatDeployedRequest } from '../models';
 // @ts-ignore
-import { ChatExperimentRequest } from '../models';
-// @ts-ignore
 import { ChatMessageWithToolCall } from '../models';
 // @ts-ignore
 import { ChatModelConfigRequest } from '../models';
@@ -118,7 +116,7 @@ export const ChatsApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * Get a chat response using the project\'s active deployment.  The active deployment can be a specific model configuration or an experiment.
+         * Get a chat response using the project\'s active deployment.  The active deployment can be a specific model configuration.
          * @summary Chat Deployed
          * @param {ChatDeployedRequest} chatDeployedRequest 
          * @param {*} [options] Override http request option.
@@ -158,54 +156,6 @@ export const ChatsApiAxiosParamCreator = function (configuration?: Configuration
                 httpMethod: 'POST'
             });
             localVarRequestOptions.data = serializeDataIfNeeded(chatDeployedRequest, localVarRequestOptions, configuration)
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Get a chat response for a specific experiment.
-         * @summary Chat Experiment
-         * @param {ChatExperimentRequest} chatExperimentRequest 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createExperiment: async (chatExperimentRequest: ChatExperimentRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'chatExperimentRequest' is not null or undefined
-            assertParamExists('createExperiment', 'chatExperimentRequest', chatExperimentRequest)
-            const localVarPath = `/chat-experiment`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication APIKeyHeader required
-            await setApiKeyToObject({ object: localVarHeaderParameter, key: "X-API-KEY", keyParamName: "xAPIKEY", configuration })
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            requestBeforeHook({
-                requestBody: chatExperimentRequest,
-                queryParameters: localVarQueryParameter,
-                requestConfig: localVarRequestOptions,
-                path: localVarPath,
-                configuration,
-                pathTemplate: '/chat-experiment',
-                httpMethod: 'POST'
-            });
-            localVarRequestOptions.data = serializeDataIfNeeded(chatExperimentRequest, localVarRequestOptions, configuration)
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
@@ -307,7 +257,7 @@ export const ChatsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Get a chat response using the project\'s active deployment.  The active deployment can be a specific model configuration or an experiment.
+         * Get a chat response using the project\'s active deployment.  The active deployment can be a specific model configuration.
          * @summary Chat Deployed
          * @param {ChatsApiCreateDeployedRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -339,41 +289,6 @@ export const ChatsApiFp = function(configuration?: Configuration) {
                 environment: requestParameters.environment
             };
             const localVarAxiosArgs = await localVarAxiosParamCreator.createDeployed(chatDeployedRequest, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Get a chat response for a specific experiment.
-         * @summary Chat Experiment
-         * @param {ChatsApiCreateExperimentRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async createExperiment(requestParameters: ChatsApiCreateExperimentRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ChatResponse>> {
-            const chatExperimentRequest: ChatExperimentRequest = {
-                project: requestParameters.project,
-                project_id: requestParameters.project_id,
-                session_id: requestParameters.session_id,
-                session_reference_id: requestParameters.session_reference_id,
-                parent_id: requestParameters.parent_id,
-                parent_reference_id: requestParameters.parent_reference_id,
-                inputs: requestParameters.inputs,
-                source: requestParameters.source,
-                metadata: requestParameters.metadata,
-                save: requestParameters.save,
-                source_datapoint_id: requestParameters.source_datapoint_id,
-                provider_api_keys: requestParameters.provider_api_keys,
-                num_samples: requestParameters.num_samples,
-                stream: requestParameters.stream,
-                user: requestParameters.user,
-                seed: requestParameters.seed,
-                return_inputs: requestParameters.return_inputs,
-                messages: requestParameters.messages,
-                tool_choice: requestParameters.tool_choice,
-                tool_call: requestParameters.tool_call,
-                response_format: requestParameters.response_format,
-                experiment_id: requestParameters.experiment_id
-            };
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createExperiment(chatExperimentRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -432,7 +347,7 @@ export const ChatsApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.create(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Get a chat response using the project\'s active deployment.  The active deployment can be a specific model configuration or an experiment.
+         * Get a chat response using the project\'s active deployment.  The active deployment can be a specific model configuration.
          * @summary Chat Deployed
          * @param {ChatsApiCreateDeployedRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -440,16 +355,6 @@ export const ChatsApiFactory = function (configuration?: Configuration, basePath
          */
         createDeployed(requestParameters: ChatsApiCreateDeployedRequest, options?: AxiosRequestConfig): AxiosPromise<ChatResponse> {
             return localVarFp.createDeployed(requestParameters, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Get a chat response for a specific experiment.
-         * @summary Chat Experiment
-         * @param {ChatsApiCreateExperimentRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createExperiment(requestParameters: ChatsApiCreateExperimentRequest, options?: AxiosRequestConfig): AxiosPromise<ChatResponse> {
-            return localVarFp.createExperiment(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
          * Get chat response for a specific model configuration.
@@ -483,15 +388,6 @@ export type ChatsApiCreateDeployedRequest = {
 } & ChatDeployedRequest
 
 /**
- * Request parameters for createExperiment operation in ChatsApi.
- * @export
- * @interface ChatsApiCreateExperimentRequest
- */
-export type ChatsApiCreateExperimentRequest = {
-    
-} & ChatExperimentRequest
-
-/**
  * Request parameters for createModelConfig operation in ChatsApi.
  * @export
  * @interface ChatsApiCreateModelConfigRequest
@@ -520,7 +416,7 @@ export class ChatsApiGenerated extends BaseAPI {
     }
 
     /**
-     * Get a chat response using the project\'s active deployment.  The active deployment can be a specific model configuration or an experiment.
+     * Get a chat response using the project\'s active deployment.  The active deployment can be a specific model configuration.
      * @summary Chat Deployed
      * @param {ChatsApiCreateDeployedRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -529,18 +425,6 @@ export class ChatsApiGenerated extends BaseAPI {
      */
     public createDeployed(requestParameters: ChatsApiCreateDeployedRequest, options?: AxiosRequestConfig) {
         return ChatsApiFp(this.configuration).createDeployed(requestParameters, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Get a chat response for a specific experiment.
-     * @summary Chat Experiment
-     * @param {ChatsApiCreateExperimentRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ChatsApiGenerated
-     */
-    public createExperiment(requestParameters: ChatsApiCreateExperimentRequest, options?: AxiosRequestConfig) {
-        return ChatsApiFp(this.configuration).createExperiment(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

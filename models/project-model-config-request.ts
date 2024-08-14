@@ -132,12 +132,6 @@ export interface ProjectModelConfigRequest {
      */
     'project_id'?: string;
     /**
-     * If specified, the model config will be added to this experiment. Experiments are used for A/B testing and optimizing hyperparameters.
-     * @type {string}
-     * @memberof ProjectModelConfigRequest
-     */
-    'experiment'?: string;
-    /**
      * Prompt template that will take your specified inputs to form your final request to the provider model. NB: Input variables within the prompt template should be specified with syntax: {{INPUT_NAME}}.
      * @type {string}
      * @memberof ProjectModelConfigRequest

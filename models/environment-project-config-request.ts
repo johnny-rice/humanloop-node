@@ -41,13 +41,7 @@ export interface EnvironmentProjectConfigRequest {
      * @type {string}
      * @memberof EnvironmentProjectConfigRequest
      */
-    'config_id'?: string;
-    /**
-     * String ID of experiment. Starts with `exp_`.
-     * @type {string}
-     * @memberof EnvironmentProjectConfigRequest
-     */
-    'experiment_id'?: string;
+    'config_id': string;
     /**
      * List of environments to associate with the model config.
      * @type {Array<EnvironmentRequest>}

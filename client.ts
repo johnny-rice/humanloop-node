@@ -32,12 +32,10 @@ import {
   ChatsApi,
   ChatsApiCreateRequest,
   ChatsApiCreateDeployedRequest,
-  ChatsApiCreateExperimentRequest,
   ChatsApiCreateModelConfigRequest,
   CompletionsApi,
   CompletionsApiCreateRequest,
   CompletionsApiCreateDeployedRequest,
-  CompletionsApiCreateExperimentRequest,
   CompletionsApiCreateModelConfigRequest,
   DatapointsApi,
   DatasetsApi,
@@ -91,10 +89,6 @@ export class Humanloop extends HumanloopCustom {
        return this.chats.createDeployed(requestParameters, options)
    }
 
-   chatExperiment(requestParameters: ChatsApiCreateExperimentRequest, options?: AxiosRequestConfig) {
-       return this.chats.createExperiment(requestParameters, options)
-   }
-
    chatModelConfiguration(requestParameters: ChatsApiCreateModelConfigRequest, options?: AxiosRequestConfig) {
        return this.chats.createModelConfig(requestParameters, options)
    }
@@ -105,10 +99,6 @@ export class Humanloop extends HumanloopCustom {
 
    completeDeployed(requestParameters: CompletionsApiCreateDeployedRequest, options?: AxiosRequestConfig) {
        return this.completions.createDeployed(requestParameters, options)
-   }
-
-   completeExperiment(requestParameters: CompletionsApiCreateExperimentRequest, options?: AxiosRequestConfig) {
-       return this.completions.createExperiment(requestParameters, options)
    }
 
    completeModelConfiguration(requestParameters: CompletionsApiCreateModelConfigRequest, options?: AxiosRequestConfig) {

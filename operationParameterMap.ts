@@ -145,76 +145,6 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
-    '/chat-experiment-POST': {
-        parameters: [
-            {
-                name: 'messages'
-            },
-            {
-                name: 'experiment_id'
-            },
-            {
-                name: 'project'
-            },
-            {
-                name: 'project_id'
-            },
-            {
-                name: 'session_id'
-            },
-            {
-                name: 'session_reference_id'
-            },
-            {
-                name: 'parent_id'
-            },
-            {
-                name: 'parent_reference_id'
-            },
-            {
-                name: 'inputs'
-            },
-            {
-                name: 'source'
-            },
-            {
-                name: 'metadata'
-            },
-            {
-                name: 'save'
-            },
-            {
-                name: 'source_datapoint_id'
-            },
-            {
-                name: 'provider_api_keys'
-            },
-            {
-                name: 'num_samples'
-            },
-            {
-                name: 'stream'
-            },
-            {
-                name: 'user'
-            },
-            {
-                name: 'seed'
-            },
-            {
-                name: 'return_inputs'
-            },
-            {
-                name: 'tool_choice'
-            },
-            {
-                name: 'tool_call'
-            },
-            {
-                name: 'response_format'
-            },
-        ]
-    },
     '/chat-model-config-POST': {
         parameters: [
             {
@@ -410,70 +340,6 @@ export const operationParameterMap: Record<string, Entry> = {
             },
             {
                 name: 'environment'
-            },
-        ]
-    },
-    '/completion-experiment-POST': {
-        parameters: [
-            {
-                name: 'experiment_id'
-            },
-            {
-                name: 'project'
-            },
-            {
-                name: 'project_id'
-            },
-            {
-                name: 'session_id'
-            },
-            {
-                name: 'session_reference_id'
-            },
-            {
-                name: 'parent_id'
-            },
-            {
-                name: 'parent_reference_id'
-            },
-            {
-                name: 'inputs'
-            },
-            {
-                name: 'source'
-            },
-            {
-                name: 'metadata'
-            },
-            {
-                name: 'save'
-            },
-            {
-                name: 'source_datapoint_id'
-            },
-            {
-                name: 'provider_api_keys'
-            },
-            {
-                name: 'num_samples'
-            },
-            {
-                name: 'stream'
-            },
-            {
-                name: 'user'
-            },
-            {
-                name: 'seed'
-            },
-            {
-                name: 'return_inputs'
-            },
-            {
-                name: 'logprobs'
-            },
-            {
-                name: 'suffix'
             },
         ]
     },
@@ -963,9 +829,6 @@ export const operationParameterMap: Record<string, Entry> = {
                 name: 'reference_id'
             },
             {
-                name: 'trial_id'
-            },
-            {
                 name: 'messages'
             },
             {
@@ -1122,9 +985,6 @@ export const operationParameterMap: Record<string, Entry> = {
                 name: 'project_id'
             },
             {
-                name: 'experiment'
-            },
-            {
                 name: 'prompt_template'
             },
             {
@@ -1199,9 +1059,6 @@ export const operationParameterMap: Record<string, Entry> = {
                 name: 'name'
             },
             {
-                name: 'feedback_types'
-            },
-            {
                 name: 'directory_id'
             },
         ]
@@ -1212,27 +1069,17 @@ export const operationParameterMap: Record<string, Entry> = {
                 name: 'type'
             },
             {
+                name: 'class'
+            },
+            {
                 name: 'id'
             },
             {
                 name: 'values'
             },
-            {
-                name: 'class'
-            },
         ]
     },
     '/projects/{id}/active-config-DELETE': {
-        parameters: [
-            {
-                name: 'id'
-            },
-            {
-                name: 'environment'
-            },
-        ]
-    },
-    '/projects/{id}/active-experiment-DELETE': {
         parameters: [
             {
                 name: 'id'
@@ -1262,13 +1109,10 @@ export const operationParameterMap: Record<string, Entry> = {
     '/projects/{project_id}/deploy-config-PATCH': {
         parameters: [
             {
-                name: 'project_id'
-            },
-            {
                 name: 'config_id'
             },
             {
-                name: 'experiment_id'
+                name: 'project_id'
             },
             {
                 name: 'environments'
@@ -1353,13 +1197,7 @@ export const operationParameterMap: Record<string, Entry> = {
                 name: 'name'
             },
             {
-                name: 'active_experiment_id'
-            },
-            {
                 name: 'active_config_id'
-            },
-            {
-                name: 'positive_labels'
             },
             {
                 name: 'directory_id'

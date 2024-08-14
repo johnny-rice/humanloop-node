@@ -33,6 +33,6 @@ import type * as buffer from "buffer"
  * @type JudgmentProperty
  * @export
  */
-export type JudgmentProperty = boolean | number;
+export type JudgmentProperty = boolean | number | Array<string> | string;
 
 

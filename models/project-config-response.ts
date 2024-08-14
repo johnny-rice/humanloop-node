@@ -30,7 +30,6 @@ import type * as buffer from "buffer"
 
 import { ConfigResponse } from './config-response';
 import { ModelConfigEvaluatorAggregateResponse } from './model-config-evaluator-aggregate-response';
-import { ProjectModelConfigFeedbackStatsResponse } from './project-model-config-feedback-stats-response';
 
 /**
  * 
@@ -69,23 +68,11 @@ export interface ProjectConfigResponse {
      */
     'last_used': string;
     /**
-     * Feedback statistics for the project model config.
-     * @type {Array<ProjectModelConfigFeedbackStatsResponse>}
-     * @memberof ProjectConfigResponse
-     */
-    'feedback_stats'?: Array<ProjectModelConfigFeedbackStatsResponse>;
-    /**
      * Number of datapoints associated with this project model config.
      * @type {number}
      * @memberof ProjectConfigResponse
      */
     'num_datapoints'?: number;
-    /**
-     * The ID of the experiment the model config has been registered to. Only populated when registering a model config to an experiment.
-     * @type {string}
-     * @memberof ProjectConfigResponse
-     */
-    'experiment_id'?: string;
     /**
      * Aggregates of evaluators for the model config.
      * @type {Array<ModelConfigEvaluatorAggregateResponse>}

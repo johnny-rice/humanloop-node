@@ -60,18 +60,6 @@ export interface EnvironmentProjectConfigResponse {
      */
     'model_config_name'?: string;
     /**
-     * String ID of experiment. Starts with `exp_`.
-     * @type {string}
-     * @memberof EnvironmentProjectConfigResponse
-     */
-    'experiment_id'?: string;
-    /**
-     * Display name of experiment.
-     * @type {string}
-     * @memberof EnvironmentProjectConfigResponse
-     */
-    'experiment_name'?: string;
-    /**
      * The ID of the environment.
      * @type {string}
      * @memberof EnvironmentProjectConfigResponse

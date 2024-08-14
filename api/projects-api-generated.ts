@@ -61,8 +61,6 @@ import { PaginatedDataLogResponse } from '../models';
 // @ts-ignore
 import { PaginatedDataProjectResponse } from '../models';
 // @ts-ignore
-import { PositiveLabel } from '../models';
-// @ts-ignore
 import { ProjectConfigResponse } from '../models';
 // @ts-ignore
 import { ProjectResponse } from '../models';
@@ -135,6 +133,7 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
          * @param {string} id String ID of project. Starts with &#x60;pr_&#x60;.
          * @param {FeedbackTypeRequest} feedbackTypeRequest 
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         createFeedbackType: async (id: string, feedbackTypeRequest: FeedbackTypeRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -221,55 +220,6 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
                 path: localVarPath,
                 configuration,
                 pathTemplate: '/projects/{id}/active-config',
-                httpMethod: 'DELETE'
-            });
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Remove the project\'s active experiment, if set.  This has no effect if the project does not have an active experiment set.
-         * @summary Deactivate Experiment
-         * @param {string} id String ID of project. Starts with &#x60;pr_&#x60;.
-         * @param {string} [environment] Name for the environment. E.g. \&#39;producton\&#39;. If not provided, will return the experiment for the default environment.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        deactivateExperiment: async (id: string, environment?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('deactivateExperiment', 'id', id)
-            const localVarPath = `/projects/{id}/active-experiment`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id !== undefined ? id : `-id-`)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions: AxiosRequestConfig = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication APIKeyHeader required
-            await setApiKeyToObject({ object: localVarHeaderParameter, key: "X-API-KEY", keyParamName: "xAPIKEY", configuration })
-            if (environment !== undefined) {
-                localVarQueryParameter['environment'] = environment;
-            }
-
-
-    
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            requestBeforeHook({
-                queryParameters: localVarQueryParameter,
-                requestConfig: localVarRequestOptions,
-                path: localVarPath,
-                configuration,
-                pathTemplate: '/projects/{id}/active-experiment',
                 httpMethod: 'DELETE'
             });
 
@@ -522,10 +472,10 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * Retrieves a config to use to execute your model.  A config will be selected based on the project\'s active config/experiment settings.
+         * Retrieves a config to use to execute your model.  A config will be selected based on the project\'s active config settings.
          * @summary Get Active Config
          * @param {string} id String ID of project. Starts with &#x60;pr_&#x60;.
-         * @param {string} [environment] Name for the environment. E.g. \&#39;producton\&#39;. If not provided, will return the active config for the default environment.
+         * @param {string} [environment] Name for the environment. E.g. \&#39;production\&#39;. If not provided, will return the active config for the default environment.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -734,7 +684,7 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * Update a specific project.  Set the project\'s active model config/experiment by passing either `active_experiment_id` or `active_model_config_id`. These will be set to the Default environment unless a list of environments are also passed in specifically detailing which environments to assign the active config or experiment.  Set the feedback labels to be treated as positive user feedback used in calculating top-level project metrics by passing a list of labels in `positive_labels`.
+         * Update a specific project.  Set the project\'s active model config by passing `active_model_config_id`. These will be set to the Default environment unless a list of environments are also passed in specifically detailing which environments to assign the active config.
          * @summary Update
          * @param {string} id String ID of project. Starts with &#x60;pr_&#x60;.
          * @param {UpdateProjectRequest} updateProjectRequest 
@@ -786,18 +736,16 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * Update feedback types.  Allows enabling the available feedback types and setting status of feedback types/categorical values.  This behaves like an upsert; any feedback categorical values that do not already exist in the project will be created.
+         * Update feedback types.  WARNING: This endpoint has been decommissioned and no longer works. Please use the v5 Human Evaluators API instead.
          * @summary Update Feedback Types
          * @param {string} id String ID of project. Starts with &#x60;pr_&#x60;.
-         * @param {Array<FeedbackTypeRequest>} feedbackTypeRequest 
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
-        updateFeedbackTypes: async (id: string, feedbackTypeRequest: Array<FeedbackTypeRequest>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateFeedbackTypes: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('updateFeedbackTypes', 'id', id)
-            // verify required parameter 'feedbackTypeRequest' is not null or undefined
-            assertParamExists('updateFeedbackTypes', 'feedbackTypeRequest', feedbackTypeRequest)
             const localVarPath = `/projects/{id}/feedback-types`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id !== undefined ? id : `-id-`)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -815,13 +763,9 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
             await setApiKeyToObject({ object: localVarHeaderParameter, key: "X-API-KEY", keyParamName: "xAPIKEY", configuration })
 
     
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             requestBeforeHook({
-                requestBody: feedbackTypeRequest,
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
@@ -829,7 +773,6 @@ export const ProjectsApiAxiosParamCreator = function (configuration?: Configurat
                 pathTemplate: '/projects/{id}/feedback-types',
                 httpMethod: 'PATCH'
             });
-            localVarRequestOptions.data = serializeDataIfNeeded(feedbackTypeRequest, localVarRequestOptions, configuration)
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
@@ -857,7 +800,6 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
         async create(requestParameters: ProjectsApiCreateRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectResponse>> {
             const createProjectRequest: CreateProjectRequest = {
                 name: requestParameters.name,
-                feedback_types: requestParameters.feedback_types,
                 directory_id: requestParameters.directory_id
             };
             const localVarAxiosArgs = await localVarAxiosParamCreator.create(createProjectRequest, options);
@@ -868,13 +810,14 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
          * @summary Create Feedback Type
          * @param {ProjectsApiCreateFeedbackTypeRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async createFeedbackType(requestParameters: ProjectsApiCreateFeedbackTypeRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FeedbackTypeModel>> {
             const feedbackTypeRequest: FeedbackTypeRequest = {
                 type: requestParameters.type,
-                values: requestParameters.values,
-                class: requestParameters.class
+                class: requestParameters.class,
+                values: requestParameters.values
             };
             const localVarAxiosArgs = await localVarAxiosParamCreator.createFeedbackType(requestParameters.id, feedbackTypeRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
@@ -888,17 +831,6 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
          */
         async deactivateConfig(requestParameters: ProjectsApiDeactivateConfigRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deactivateConfig(requestParameters.id, requestParameters.environment, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Remove the project\'s active experiment, if set.  This has no effect if the project does not have an active experiment set.
-         * @summary Deactivate Experiment
-         * @param {ProjectsApiDeactivateExperimentRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async deactivateExperiment(requestParameters: ProjectsApiDeactivateExperimentRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.deactivateExperiment(requestParameters.id, requestParameters.environment, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -933,7 +865,6 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
         async deployConfig(requestParameters: ProjectsApiDeployConfigRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<EnvironmentProjectConfigResponse>>> {
             const environmentProjectConfigRequest: EnvironmentProjectConfigRequest = {
                 config_id: requestParameters.config_id,
-                experiment_id: requestParameters.experiment_id,
                 environments: requestParameters.environments
             };
             const localVarAxiosArgs = await localVarAxiosParamCreator.deployConfig(requestParameters.projectId, environmentProjectConfigRequest, options);
@@ -962,7 +893,7 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Retrieves a config to use to execute your model.  A config will be selected based on the project\'s active config/experiment settings.
+         * Retrieves a config to use to execute your model.  A config will be selected based on the project\'s active config settings.
          * @summary Get Active Config
          * @param {ProjectsApiGetActiveConfigRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1006,7 +937,7 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Update a specific project.  Set the project\'s active model config/experiment by passing either `active_experiment_id` or `active_model_config_id`. These will be set to the Default environment unless a list of environments are also passed in specifically detailing which environments to assign the active config or experiment.  Set the feedback labels to be treated as positive user feedback used in calculating top-level project metrics by passing a list of labels in `positive_labels`.
+         * Update a specific project.  Set the project\'s active model config by passing `active_model_config_id`. These will be set to the Default environment unless a list of environments are also passed in specifically detailing which environments to assign the active config.
          * @summary Update
          * @param {ProjectsApiUpdateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1015,24 +946,22 @@ export const ProjectsApiFp = function(configuration?: Configuration) {
         async update(requestParameters: ProjectsApiUpdateRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectResponse>> {
             const updateProjectRequest: UpdateProjectRequest = {
                 name: requestParameters.name,
-                active_experiment_id: requestParameters.active_experiment_id,
                 active_config_id: requestParameters.active_config_id,
-                positive_labels: requestParameters.positive_labels,
                 directory_id: requestParameters.directory_id
             };
             const localVarAxiosArgs = await localVarAxiosParamCreator.update(requestParameters.id, updateProjectRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Update feedback types.  Allows enabling the available feedback types and setting status of feedback types/categorical values.  This behaves like an upsert; any feedback categorical values that do not already exist in the project will be created.
+         * Update feedback types.  WARNING: This endpoint has been decommissioned and no longer works. Please use the v5 Human Evaluators API instead.
          * @summary Update Feedback Types
          * @param {ProjectsApiUpdateFeedbackTypesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
-        async updateFeedbackTypes(requestParameters: ProjectsApiUpdateFeedbackTypesRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<FeedbackTypeModel>>> {
-            const feedbackTypeRequest: Array<FeedbackTypeRequest> = requestParameters.requestBody;
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateFeedbackTypes(requestParameters.id, feedbackTypeRequest, options);
+        async updateFeedbackTypes(requestParameters: ProjectsApiUpdateFeedbackTypesRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateFeedbackTypes(requestParameters.id, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -1060,6 +989,7 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
          * @summary Create Feedback Type
          * @param {ProjectsApiCreateFeedbackTypeRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         createFeedbackType(requestParameters: ProjectsApiCreateFeedbackTypeRequest, options?: AxiosRequestConfig): AxiosPromise<FeedbackTypeModel> {
@@ -1074,16 +1004,6 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
          */
         deactivateConfig(requestParameters: ProjectsApiDeactivateConfigRequest, options?: AxiosRequestConfig): AxiosPromise<ProjectResponse> {
             return localVarFp.deactivateConfig(requestParameters, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Remove the project\'s active experiment, if set.  This has no effect if the project does not have an active experiment set.
-         * @summary Deactivate Experiment
-         * @param {ProjectsApiDeactivateExperimentRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        deactivateExperiment(requestParameters: ProjectsApiDeactivateExperimentRequest, options?: AxiosRequestConfig): AxiosPromise<ProjectResponse> {
-            return localVarFp.deactivateExperiment(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
          * Delete a specific file.
@@ -1136,7 +1056,7 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.get(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Retrieves a config to use to execute your model.  A config will be selected based on the project\'s active config/experiment settings.
+         * Retrieves a config to use to execute your model.  A config will be selected based on the project\'s active config settings.
          * @summary Get Active Config
          * @param {ProjectsApiGetActiveConfigRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1176,7 +1096,7 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.listDeployedConfigs(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Update a specific project.  Set the project\'s active model config/experiment by passing either `active_experiment_id` or `active_model_config_id`. These will be set to the Default environment unless a list of environments are also passed in specifically detailing which environments to assign the active config or experiment.  Set the feedback labels to be treated as positive user feedback used in calculating top-level project metrics by passing a list of labels in `positive_labels`.
+         * Update a specific project.  Set the project\'s active model config by passing `active_model_config_id`. These will be set to the Default environment unless a list of environments are also passed in specifically detailing which environments to assign the active config.
          * @summary Update
          * @param {ProjectsApiUpdateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1186,13 +1106,14 @@ export const ProjectsApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.update(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Update feedback types.  Allows enabling the available feedback types and setting status of feedback types/categorical values.  This behaves like an upsert; any feedback categorical values that do not already exist in the project will be created.
+         * Update feedback types.  WARNING: This endpoint has been decommissioned and no longer works. Please use the v5 Human Evaluators API instead.
          * @summary Update Feedback Types
          * @param {ProjectsApiUpdateFeedbackTypesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
-        updateFeedbackTypes(requestParameters: ProjectsApiUpdateFeedbackTypesRequest, options?: AxiosRequestConfig): AxiosPromise<Array<FeedbackTypeModel>> {
+        updateFeedbackTypes(requestParameters: ProjectsApiUpdateFeedbackTypesRequest, options?: AxiosRequestConfig): AxiosPromise<object> {
             return localVarFp.updateFeedbackTypes(requestParameters, options).then((request) => request(axios, basePath));
         },
     };
@@ -1241,29 +1162,6 @@ export type ProjectsApiDeactivateConfigRequest = {
     * Name for the environment. E.g. \'production\'. If not provided, will delete the active config for the default environment.
     * @type {string}
     * @memberof ProjectsApiDeactivateConfig
-    */
-    readonly environment?: string
-    
-}
-
-/**
- * Request parameters for deactivateExperiment operation in ProjectsApi.
- * @export
- * @interface ProjectsApiDeactivateExperimentRequest
- */
-export type ProjectsApiDeactivateExperimentRequest = {
-    
-    /**
-    * String ID of project. Starts with `pr_`.
-    * @type {string}
-    * @memberof ProjectsApiDeactivateExperiment
-    */
-    readonly id: string
-    
-    /**
-    * Name for the environment. E.g. \'producton\'. If not provided, will return the experiment for the default environment.
-    * @type {string}
-    * @memberof ProjectsApiDeactivateExperiment
     */
     readonly environment?: string
     
@@ -1385,7 +1283,7 @@ export type ProjectsApiGetActiveConfigRequest = {
     readonly id: string
     
     /**
-    * Name for the environment. E.g. \'producton\'. If not provided, will return the active config for the default environment.
+    * Name for the environment. E.g. \'production\'. If not provided, will return the active config for the default environment.
     * @type {string}
     * @memberof ProjectsApiGetActiveConfig
     */
@@ -1505,18 +1403,14 @@ export type ProjectsApiUpdateRequest = {
  * @interface ProjectsApiUpdateFeedbackTypesRequest
  */
 export type ProjectsApiUpdateFeedbackTypesRequest = {
+    
     /**
     * String ID of project. Starts with `pr_`.
     * @type {string}
     * @memberof ProjectsApiUpdateFeedbackTypes
     */
     readonly id: string
-    /**
-    * 
-    * @type {Array<FeedbackTypeRequest>}
-    * @memberof ProjectsApiUpdateFeedbackTypes
-    */
-    readonly requestBody: Array<FeedbackTypeRequest>
+    
 }
 
 /**
@@ -1543,6 +1437,7 @@ export class ProjectsApiGenerated extends BaseAPI {
      * @summary Create Feedback Type
      * @param {ProjectsApiCreateFeedbackTypeRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof ProjectsApiGenerated
      */
@@ -1560,18 +1455,6 @@ export class ProjectsApiGenerated extends BaseAPI {
      */
     public deactivateConfig(requestParameters: ProjectsApiDeactivateConfigRequest, options?: AxiosRequestConfig) {
         return ProjectsApiFp(this.configuration).deactivateConfig(requestParameters, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Remove the project\'s active experiment, if set.  This has no effect if the project does not have an active experiment set.
-     * @summary Deactivate Experiment
-     * @param {ProjectsApiDeactivateExperimentRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ProjectsApiGenerated
-     */
-    public deactivateExperiment(requestParameters: ProjectsApiDeactivateExperimentRequest, options?: AxiosRequestConfig) {
-        return ProjectsApiFp(this.configuration).deactivateExperiment(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1640,7 +1523,7 @@ export class ProjectsApiGenerated extends BaseAPI {
     }
 
     /**
-     * Retrieves a config to use to execute your model.  A config will be selected based on the project\'s active config/experiment settings.
+     * Retrieves a config to use to execute your model.  A config will be selected based on the project\'s active config settings.
      * @summary Get Active Config
      * @param {ProjectsApiGetActiveConfigRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1693,7 +1576,7 @@ export class ProjectsApiGenerated extends BaseAPI {
     }
 
     /**
-     * Update a specific project.  Set the project\'s active model config/experiment by passing either `active_experiment_id` or `active_model_config_id`. These will be set to the Default environment unless a list of environments are also passed in specifically detailing which environments to assign the active config or experiment.  Set the feedback labels to be treated as positive user feedback used in calculating top-level project metrics by passing a list of labels in `positive_labels`.
+     * Update a specific project.  Set the project\'s active model config by passing `active_model_config_id`. These will be set to the Default environment unless a list of environments are also passed in specifically detailing which environments to assign the active config.
      * @summary Update
      * @param {ProjectsApiUpdateRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1705,10 +1588,11 @@ export class ProjectsApiGenerated extends BaseAPI {
     }
 
     /**
-     * Update feedback types.  Allows enabling the available feedback types and setting status of feedback types/categorical values.  This behaves like an upsert; any feedback categorical values that do not already exist in the project will be created.
+     * Update feedback types.  WARNING: This endpoint has been decommissioned and no longer works. Please use the v5 Human Evaluators API instead.
      * @summary Update Feedback Types
      * @param {ProjectsApiUpdateFeedbackTypesRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof ProjectsApiGenerated
      */
