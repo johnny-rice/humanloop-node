@@ -66,5 +66,11 @@ export interface CreateEvaluationRequest {
      * @memberof CreateEvaluationRequest
      */
     'hl_generated'?: boolean;
+    /**
+     * Name of the Evaluation to help identify it.
+     * @type {string}
+     * @memberof CreateEvaluationRequest
+     */
+    'name'?: string;
 }
 

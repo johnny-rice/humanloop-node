@@ -1357,6 +1357,10 @@ API keys required by each provider to make API calls. The API keys provided here
 
 Whether the log generations for this evaluation should be performed by Humanloop. If `False`, the log generations should be submitted by the user via the API.
 
+##### name: `string`<a id="name-string"></a>
+
+Name of the Evaluation to help identify it.
+
 #### 🔄 Return<a id="🔄-return"></a>
 
 [EvaluationResponse](./models/evaluation-response.ts)

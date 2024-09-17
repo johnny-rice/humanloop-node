@@ -34,5 +34,5 @@ import type * as buffer from "buffer"
  * @export
  * @enum {string}
  */
-export type FileType = 'prompt' | 'tool' | 'dataset' | 'evaluator'
+export type FileType = 'prompt' | 'tool' | 'dataset' | 'evaluator' | 'flow'
 

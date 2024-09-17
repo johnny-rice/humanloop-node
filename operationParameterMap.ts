@@ -541,6 +541,9 @@ export const operationParameterMap: Record<string, Entry> = {
             {
                 name: 'hl_generated'
             },
+            {
+                name: 'name'
+            },
         ]
     },
     '/evaluations/{id}-GET': {

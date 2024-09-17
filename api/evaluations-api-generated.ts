@@ -632,7 +632,8 @@ export const EvaluationsApiFp = function(configuration?: Configuration) {
                 evaluator_ids: requestParameters.evaluator_ids,
                 dataset_id: requestParameters.dataset_id,
                 provider_api_keys: requestParameters.provider_api_keys,
-                hl_generated: requestParameters.hl_generated
+                hl_generated: requestParameters.hl_generated,
+                name: requestParameters.name
             };
             const localVarAxiosArgs = await localVarAxiosParamCreator.create(requestParameters.projectId, createEvaluationRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);

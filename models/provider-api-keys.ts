@@ -64,6 +64,12 @@ export interface ProviderApiKeys {
      * @type {string}
      * @memberof ProviderApiKeys
      */
+    'bedrock'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProviderApiKeys
+     */
     'cohere'?: string;
     /**
      * 
